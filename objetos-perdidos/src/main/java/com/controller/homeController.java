@@ -28,7 +28,7 @@ public class homeController {
 		 model.addAttribute("hola", "Saludos desde el controlador del home ---------------Hola Mundo");
 		 
 		 
-		 if(login.getUserName()!=null){
+		 if(login != null){
 			 return "index";
 		 }else{
 			 return "redirect:/loginUsers/valida";
