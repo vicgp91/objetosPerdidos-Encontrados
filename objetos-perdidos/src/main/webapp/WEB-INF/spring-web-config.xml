@@ -39,28 +39,7 @@
  			value="org.springframework.web.servlet.view.tiles3.TilesView" /> 
 	</bean> 
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	<mvc:resources mapping="/resources/**" location="/resources/theme1/"  cache-period="31556926"/>
-	<!-- 
-	<mvc:resources mapping="/resources/**" location="/WEB-INF/mytheme1/" />
- 	-->
  
 	<mvc:annotation-driven />
 	
