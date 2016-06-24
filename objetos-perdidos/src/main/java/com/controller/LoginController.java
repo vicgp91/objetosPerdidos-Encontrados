@@ -27,7 +27,7 @@ public class LoginController {
 
 		model.addAttribute("loginVO", loginVO);
 
-		return "jsp/login/login";
+		return "login";
 	}
 
 }
