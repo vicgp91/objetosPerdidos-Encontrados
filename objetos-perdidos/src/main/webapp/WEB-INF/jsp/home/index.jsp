@@ -2,6 +2,6 @@
 <div class="container" id="capa0">
 
 
-		<h1>My First Bootstrap Page</h1>
-		<p>This is some text.</p>
+		<h1>Bienvenido a la pagina de objetos perdidos</h1>
+		
 	</div>

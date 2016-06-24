@@ -16,10 +16,7 @@ public class homeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String inicio(HttpServletRequest request, Model model) {
 		
-		
-		//RegistroCivilVO regCivil = (RegistroCivilVO) request.getSession().getAttribute("regCivil");
-		
-		
+
 		LoginVO login = new LoginVO();
 		
 		
