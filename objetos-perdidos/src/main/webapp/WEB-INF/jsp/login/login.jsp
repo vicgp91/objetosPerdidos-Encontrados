@@ -1,3 +1,5 @@
+<%@ include file="/WEB-INF/jsp/includes/resource.jsp"%>
+	
 	<div class="container">
 		<div id="area-Pantalla" class="row">
 
@@ -22,15 +24,15 @@
 
 							
 							
-
-							<form action="j_security_check" method="post" id="loginform"
+                       <c:url var="url" value="/loginUsers/validaSubmit" />
+							<form:form action="${url}" method="POST" id="loginform"
 								class="form-horizontal"
-								enctype="application/x-www-form-urlencoded">
+								modelAttribute="loginVO">
 
 								<div style="margin-bottom: 25px" class="input-group">
 									<span class="input-group-addon"> <span class="glyphicon glyphicon-user"></span>
 									</span> <input id="login-username" type="text" class="form-control"
-										name="j_username" value=""
+										name="userName" value=""
 										placeholder="Usuario"
 										required="required" />
 								</div>
@@ -39,7 +41,7 @@
 									<span class="input-group-addon"> <i
 										class="glyphicon glyphicon-lock"></i>
 									</span> <input id="login-password" type="password"
-										class="form-control" name="j_password"
+										class="form-control" name="password"
 										placeholder="Contraseña"
 										required="required" />
 								</div>
@@ -62,7 +64,7 @@
 										</div>
 									</div>
 								</div>
-							</form>
+							</form:form>
 						</div>
 					</div>
 				</div>
