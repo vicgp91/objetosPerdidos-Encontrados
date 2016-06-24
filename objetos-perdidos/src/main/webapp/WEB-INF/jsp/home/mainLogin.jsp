@@ -21,12 +21,12 @@
 
 </div>
 
-<div class="row">
+<div class="col-lg-12 container">
 	<tiles:insertAttribute name="body" />
 
 </div>
 
-<div class="row">
+<div class="row col-lg-12 container">
 
 <tiles:insertAttribute name="footer" />
 </div>

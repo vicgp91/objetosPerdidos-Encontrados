@@ -5,19 +5,7 @@
 
 				<!-- HEADER -->
 				<header>
-				<div class="row">
-					<div class="col-lg-3 col-m-2 col-xs-3">
-						<a href="/cyoe-idp/"
-							title="Tribunal Electoral de Panam&aacute;"> <img
-							src="/cyoe-idp/resources/images/logoTE.png" class="img-header" />
-						</a>
-					</div>
-					<div class="col-lg-3 col-m-4 col-xs-3"></div>
-					<div class="col-lg-6 col-m-6 col-xs-6" style="float: right">
-						<img src="/cyoe-idp/resources/images/huella.png" class="img-header"
-							align="right" />
-					</div>
-				</div>
+
 				</header>
 				<!-- END HEADER -->
 
@@ -26,7 +14,7 @@
 					<div class="panel panel-info">
 						<div class="panel-heading">
 							<div class="panel-title">
-								Acceso a Tribunal Electoral
+								Acceso de Usuario
 							</div>
 						</div>
 
@@ -40,8 +28,7 @@
 								enctype="application/x-www-form-urlencoded">
 
 								<div style="margin-bottom: 25px" class="input-group">
-									<span class="input-group-addon"> <i
-										class="glyphicon glyphicon-user"></i>
+									<span class="input-group-addon"> <span class="glyphicon glyphicon-user"></span>
 									</span> <input id="login-username" type="text" class="form-control"
 										name="j_username" value=""
 										placeholder="Usuario"
