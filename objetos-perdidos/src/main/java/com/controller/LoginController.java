@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import model.HibernateUtil;
 import model.Usuarios;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
@@ -34,64 +35,65 @@ public class LoginController {
 
 		LoginVO loginVO = new LoginVO();
 
-		model.addAttribute("loginVO", loginVO);
+		//model.addAttribute("loginVO", loginVO);
+		//model.addAttribute("ocultarmensaje", true);
+		//model.addAttribute("mensajeLogin", "noMostrar");
 
 		return "login";
 	}
-	
-	
-	
-	
-	
+
 	@RequestMapping(value = "/validaSubmit", method = RequestMethod.POST)
 	public String editar(@ModelAttribute("loginVO") LoginVO loginVO,
 			final RedirectAttributes redirectAttributes,
-			HttpServletRequest request, Model model)  {
+			HttpServletRequest request, Model model) {
 		logger.info("Validacion de credenciales");
 
-		
 		Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-       
-        try {
-        	
-        	Usuarios user = new Usuarios();
-        	user.setUsername(loginVO.getUserName());
-        	user.setPass(loginVO.getPassword());
-        	user.setCorreoElectronico("hhh");
-        	user.setPerfil("1");
-        	user.setNombreCompleto("nnn");
-        	user.setUltimoIngreso(new Date());
-        	
-            trns = session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            if (trns != null) {
-                trns.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-		request.getSession().setAttribute("loginVO", loginVO);
+		try {
+			Usuarios user = new Usuarios();
+			trns = session.beginTransaction();
+			String queryString = "from Usuarios where USERNAME = :id";
+			Query query = session.createQuery(queryString);
+			query.setString("id", loginVO.getUserName());
+			user = (Usuarios) query.uniqueResult();
 
-		return "redirect:/";
+			if (user != null) {
+
+				if (user.getPass().equalsIgnoreCase(loginVO.getPassword())) {
+					
+					request.getSession().setAttribute("loginVO", loginVO);
+
+					return "redirect:/";
+
+				}else{
+					//model.addAttribute("mensajeLogin", "Error credenciales incorrectas");
+					redirectAttributes.addFlashAttribute("mensajeLogin", "Error credenciales incorrectas");
+					return "redirect:/loginUsers/valida";
+				}
+
+			}else{
+				//model.addAttribute("mensajeLogin", "Usuario no existe");
+				redirectAttributes.addFlashAttribute("mensajeLogin", "Usuario no existe");
+				return "redirect:/loginUsers/valida";
+			}
+
+			// session.save(user);
+			// session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			if (trns != null) {
+				trns.rollback();
+			}
+			e.printStackTrace();
+			model.addAttribute("mensajeLogin", "Ha ocurrido un error al intentar validar su informacion");
+			return "redirect:/loginUsers/valida";
+		} finally {
+			session.flush();
+			session.close();
+		}
+
+		
 	}
-
-	
-	
-	
 
 }

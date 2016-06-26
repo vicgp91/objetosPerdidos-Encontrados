@@ -18,15 +18,10 @@ public class homeController {
 		
 
 		LoginVO login = new LoginVO();
-		
-		
 		login= (LoginVO) request.getSession().getAttribute("loginVO");
-
-		 
-		 
-		 
+		
 		 if(login != null){
-			 model.addAttribute("hola", "Saludos desde el controlador del home ---------------Hola Mundo");
+			 
 			 return "index";
 		 }else{
 			 return "redirect:/loginUsers/valida";
