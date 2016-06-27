@@ -35,7 +35,7 @@ public class LoginController {
 
 		LoginVO loginVO = new LoginVO();
 
-		//model.addAttribute("loginVO", loginVO);
+		model.addAttribute("loginVO", loginVO);
 		//model.addAttribute("ocultarmensaje", true);
 		//model.addAttribute("mensajeLogin", "noMostrar");
 
