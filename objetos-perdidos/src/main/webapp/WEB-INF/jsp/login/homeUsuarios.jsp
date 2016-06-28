@@ -51,13 +51,17 @@
 								<td class="col-lg-2">${itemUsuario.celular}</td>
 								<td class="col-lg-2">${itemUsuario.correoElectronico}</td>
 								<td class="col-lg-2" style="vertical-align: middle;text-align:center;">
+							
+							
+							<c:url var="varEdit" value="/loginUsers/editUser/${itemUsuario.userName}"/>
 										<a id="editarUsuario"
-											href="#"
+											href="${varEdit}"
 											type="button" class="btn btn-success btn-sm dpdf"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar</a>
 								
-										<a id="deleteDoc"
-										href="#"
-										type="button" class="btn btn-danger btn-sm dpdf"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar</a>
+							
+								        <c:url var="varDelete" value="/loginUsers/eliminar/${itemUsuario.userName}"/>
+										<a id="deleteDoc" href="${varDelete}"
+										type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar</a>
 									
 								</td>
 							</tr>

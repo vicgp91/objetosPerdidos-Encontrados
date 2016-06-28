@@ -16,7 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -49,8 +51,13 @@ public class LoginController {
 
 		logger.info("--------------Mostrando Pantalla home usuarios--------------------");
 
-		LoginVO loginVO = new LoginVO();
+		LoginVO loginSesion = new LoginVO();
+		loginSesion = (LoginVO) resquest.getSession().getAttribute("loginVO");
+		if (loginSesion == null) {
+			return "redirect:/loginUsers/valida";
+		}
 
+		LoginVO loginVO = new LoginVO();
 		List<Usuarios> users = new ArrayList<Usuarios>();
 		List<LoginVO> userList = new ArrayList<LoginVO>();
 		Transaction trns = null;
@@ -140,6 +147,12 @@ public class LoginController {
 
 		logger.info("--------------Mostrando Pantalla de agregar Usuario---------------------");
 
+		LoginVO loginSesion = new LoginVO();
+		loginSesion = (LoginVO) resquest.getSession().getAttribute("loginVO");
+		if (loginSesion == null) {
+			return "redirect:/loginUsers/valida";
+		}
+
 		LoginVO loginVO = new LoginVO();
 
 		model.addAttribute("loginVO", loginVO);
@@ -193,5 +206,149 @@ public class LoginController {
 		}
 
 	}
+
+	// Eliminar un usuario.
+
+	@RequestMapping(value = "/eliminar/{userName}", method = RequestMethod.GET)
+	public String eliminar(@PathVariable("userName") String userName,
+			Model model, final RedirectAttributes redirectAttributes) {
+		logger.info("eliminar usuario");
+		Transaction trns = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+
+			
+			Usuarios user = (Usuarios) session.load(Usuarios.class, new String(
+					userName));
+			
+			if(user!=null){
+				trns = session.beginTransaction();
+				session.delete(user);
+				session.getTransaction().commit();
+			}
+			
+		} catch (Exception e) {
+
+			if (trns != null) {
+				trns.rollback();
+			}
+			e.printStackTrace();
+
+			redirectAttributes.addFlashAttribute("type", "error");
+			logger.error("Error controlado...", e.getCause());
+			redirectAttributes.addFlashAttribute("message",
+					"Se produjo un error al intentar eliminar usuario.");
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return "redirect:/loginUsers/admUsuarios";
+	}
+
+	@RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
+	public String editar(@PathVariable("id") String id,
+			final RedirectAttributes redirectAttributes,
+			HttpServletRequest request, Model model) {
+		logger.info("Editar Usuarios");
+
+		Transaction trns = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			Usuarios user = new Usuarios();
+			trns = session.beginTransaction();
+			String queryString = "from Usuarios where USERNAME = :id";
+			Query query = session.createQuery(queryString);
+			query.setString("id", id);
+			user = (Usuarios) query.uniqueResult();
+
+			if (user != null) {
+
+				LoginVO loginVO = new LoginVO();
+				loginVO.setCedula(user.getCedula());
+				loginVO.setNombreCompleto(user.getNombreCompleto());
+				loginVO.setUserName(user.getUsername());
+				loginVO.setCelular(user.getCelular());
+				loginVO.setPerfil(user.getPerfil());
+				loginVO.setCorreoElectronico(user.getCorreoElectronico());
+				loginVO.setPassword(user.getPass());
+
+				model.addAttribute("loginVO", loginVO);
+
+				return "editUser";
+			} else {
+				return "redirect:/loginUsers/admUsuarios";
+			}
+
+		} catch (Exception e) {
+			return "redirect:/loginUsers/admUsuarios";
+
+		} finally {
+			session.flush();
+			session.close();
+		}
+
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/editUsuarioPost", method = RequestMethod.POST)
+	public String submitEdit(
+			@ModelAttribute("loginVO") LoginVO loginVO,
+			Model model, BindingResult result,
+			final RedirectAttributes redirectAttributes)  {
+
+		logger.info("Editar usuarioPost");
+		Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+		
+		try {
+			
+			Usuarios user = new Usuarios();
+			
+			trns = session.beginTransaction();
+			String queryString = "from Usuarios where USERNAME = :id";
+			Query query = session.createQuery(queryString);
+			query.setString("id", loginVO.getUserName());
+			user = (Usuarios) query.uniqueResult();
+			
+			
+			user.setUsername(loginVO.getUserName());
+			//user.setPass(loginVO.getPassword());
+			user.setNombreCompleto(loginVO.getNombreCompleto());
+			user.setCedula(loginVO.getCedula());
+			user.setCelular(loginVO.getCelular());
+			user.setPerfil(loginVO.getPerfil());
+			user.setCorreoElectronico(loginVO.getCorreoElectronico());
+			
+			
+			session.update(user);
+            session.getTransaction().commit();
+
+			
+		} catch (Exception e) {
+			
+			logger.info("Error actualizando usuario");
+			
+			if (trns != null) {
+                trns.rollback();
+            }
+            e.printStackTrace();
+		}finally{
+			session.flush();
+            session.close();
+		}
+
+		
+		return "redirect:/loginUsers/admUsuarios";
+	}
+	
+	
+	
+	
+	
+	
 
 }
