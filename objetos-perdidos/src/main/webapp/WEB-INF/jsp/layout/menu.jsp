@@ -24,6 +24,12 @@
       
        <c:url var="urlHomeUsuarios" value="/loginUsers/admUsuarios" />
       <li><a title="Administracion de información de los usuarios" href="${urlHomeUsuarios}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Administración de Usuarios</a></li> 
+      
+      
+      
+      <c:url var="urlExit" value="/loginUsers/Signoff" />
+      <li><a title="Cerrar Sesión" href="${urlExit}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Salir</a></li> 
+      
     </ul>
   </div>
 </nav>

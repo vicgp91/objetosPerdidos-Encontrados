@@ -96,6 +96,7 @@ public class LoginController {
 			final RedirectAttributes redirectAttributes,
 			HttpServletRequest request, Model model) {
 		logger.info("Validacion de credenciales");
+		
 
 		Transaction trns = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -165,6 +166,13 @@ public class LoginController {
 			final RedirectAttributes redirectAttributes,
 			HttpServletRequest request, Model model) {
 		logger.info("Validacion de credenciales");
+		
+		
+		LoginVO loginSesion = new LoginVO();
+		loginSesion = (LoginVO) request.getSession().getAttribute("loginVO");
+		if (loginSesion == null) {
+			return "redirect:/loginUsers/valida";
+		}
 
 		Transaction trns = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -210,23 +218,29 @@ public class LoginController {
 	// Eliminar un usuario.
 
 	@RequestMapping(value = "/eliminar/{userName}", method = RequestMethod.GET)
-	public String eliminar(@PathVariable("userName") String userName,
+	public String eliminar(@PathVariable("userName") String userName, HttpServletRequest request,
 			Model model, final RedirectAttributes redirectAttributes) {
 		logger.info("eliminar usuario");
+		
+		LoginVO loginSesion = new LoginVO();
+		loginSesion = (LoginVO) request.getSession().getAttribute("loginVO");
+		if (loginSesion == null) {
+			return "redirect:/loginUsers/valida";
+		}
+		
 		Transaction trns = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 
-			
 			Usuarios user = (Usuarios) session.load(Usuarios.class, new String(
 					userName));
-			
-			if(user!=null){
+
+			if (user != null) {
 				trns = session.beginTransaction();
 				session.delete(user);
 				session.getTransaction().commit();
 			}
-			
+
 		} catch (Exception e) {
 
 			if (trns != null) {
@@ -250,6 +264,12 @@ public class LoginController {
 			final RedirectAttributes redirectAttributes,
 			HttpServletRequest request, Model model) {
 		logger.info("Editar Usuarios");
+		
+		LoginVO loginSesion = new LoginVO();
+		loginSesion = (LoginVO) request.getSession().getAttribute("loginVO");
+		if (loginSesion == null) {
+			return "redirect:/loginUsers/valida";
+		}
 
 		Transaction trns = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -289,66 +309,71 @@ public class LoginController {
 		}
 
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "/editUsuarioPost", method = RequestMethod.POST)
-	public String submitEdit(
-			@ModelAttribute("loginVO") LoginVO loginVO,
-			Model model, BindingResult result,
-			final RedirectAttributes redirectAttributes)  {
+	public String submitEdit(@ModelAttribute("loginVO") LoginVO loginVO,
+			Model model, BindingResult result, HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
+		
+		LoginVO loginSesion = new LoginVO();
+		loginSesion = (LoginVO) request.getSession().getAttribute("loginVO");
+		if (loginSesion == null) {
+			return "redirect:/loginUsers/valida";
+		}
 
 		logger.info("Editar usuarioPost");
 		Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-		
 		try {
-			
+
 			Usuarios user = new Usuarios();
-			
+
 			trns = session.beginTransaction();
 			String queryString = "from Usuarios where USERNAME = :id";
 			Query query = session.createQuery(queryString);
 			query.setString("id", loginVO.getUserName());
 			user = (Usuarios) query.uniqueResult();
-			
-			
+
 			user.setUsername(loginVO.getUserName());
-			//user.setPass(loginVO.getPassword());
+			// user.setPass(loginVO.getPassword());
 			user.setNombreCompleto(loginVO.getNombreCompleto());
 			user.setCedula(loginVO.getCedula());
 			user.setCelular(loginVO.getCelular());
 			user.setPerfil(loginVO.getPerfil());
 			user.setCorreoElectronico(loginVO.getCorreoElectronico());
-			
-			
-			session.update(user);
-            session.getTransaction().commit();
 
-			
+			session.update(user);
+			session.getTransaction().commit();
+
 		} catch (Exception e) {
-			
+
 			logger.info("Error actualizando usuario");
-			
+
 			if (trns != null) {
-                trns.rollback();
-            }
-            e.printStackTrace();
-		}finally{
+				trns.rollback();
+			}
+			e.printStackTrace();
+		} finally {
 			session.flush();
-            session.close();
+			session.close();
 		}
 
-		
 		return "redirect:/loginUsers/admUsuarios";
 	}
+
 	
 	
+	@RequestMapping(value = "/Signoff", method = RequestMethod.GET)
+	public String Signoff(HttpServletRequest resquest, Model model) {
+
+		logger.info("--------------Mostrando Pantalla de Login---------------------");
+
 	
-	
-	
-	
+
+		resquest.getSession().setAttribute("loginVO", null);
+
+		return "redirect:/loginUsers/valida";
+	}
 
 }
