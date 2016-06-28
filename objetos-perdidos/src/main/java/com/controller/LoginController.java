@@ -36,8 +36,8 @@ public class LoginController {
 		LoginVO loginVO = new LoginVO();
 
 		model.addAttribute("loginVO", loginVO);
-		//model.addAttribute("ocultarmensaje", true);
-		//model.addAttribute("mensajeLogin", "noMostrar");
+		// model.addAttribute("ocultarmensaje", true);
+		// model.addAttribute("mensajeLogin", "noMostrar");
 
 		return "login";
 	}
@@ -62,38 +62,35 @@ public class LoginController {
 			if (user != null) {
 
 				if (user.getPass().equalsIgnoreCase(loginVO.getPassword())) {
-					
+
 					request.getSession().setAttribute("loginVO", loginVO);
 
 					return "redirect:/";
 
-				}else{
-					//model.addAttribute("mensajeLogin", "Error credenciales incorrectas");
-					redirectAttributes.addFlashAttribute("mensajeLogin", "Error credenciales incorrectas");
+				} else {
+					redirectAttributes.addFlashAttribute("mensajeLogin",
+							"Error credenciales incorrectas");
 					return "redirect:/loginUsers/valida";
 				}
 
-			}else{
-				//model.addAttribute("mensajeLogin", "Usuario no existe");
-				redirectAttributes.addFlashAttribute("mensajeLogin", "Usuario no existe");
+			} else {
+				redirectAttributes.addFlashAttribute("mensajeLogin",
+						"Usuario no existe");
 				return "redirect:/loginUsers/valida";
 			}
-
-			// session.save(user);
-			// session.getTransaction().commit();
 		} catch (RuntimeException e) {
 			if (trns != null) {
 				trns.rollback();
 			}
 			e.printStackTrace();
-			model.addAttribute("mensajeLogin", "Ha ocurrido un error al intentar validar su informacion");
+			model.addAttribute("mensajeLogin",
+					"Ha ocurrido un error al intentar validar su informacion");
 			return "redirect:/loginUsers/valida";
 		} finally {
 			session.flush();
 			session.close();
 		}
 
-		
 	}
 
 }
