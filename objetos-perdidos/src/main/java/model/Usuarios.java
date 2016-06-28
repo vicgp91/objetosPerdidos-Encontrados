@@ -1,11 +1,15 @@
 package model;
-// Generated 25-jun-2016 11:56:38 by Hibernate Tools 4.3.1
+// Generated 28-jun-2016 9:50:55 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,16 +24,16 @@ import javax.persistence.TemporalType;
 public class Usuarios  implements java.io.Serializable {
 
 
-     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String username;
+     private String username;
      private String pass;
      private String nombreCompleto;
+     private String cedula;
+     private String celular;
      private String perfil;
-     private Date ultimoIngreso;
      private String correoElectronico;
+     private Date fechaRegistro;
+     private String imagenPerfil;
+     private Set reportes = new HashSet(0);
 
     public Usuarios() {
     }
@@ -38,13 +42,17 @@ public class Usuarios  implements java.io.Serializable {
     public Usuarios(String username) {
         this.username = username;
     }
-    public Usuarios(String username, String pass, String nombreCompleto, String perfil, Date ultimoIngreso, String correoElectronico) {
+    public Usuarios(String username, String pass, String nombreCompleto, String cedula, String celular, String perfil, String correoElectronico, Date fechaRegistro, String imagenPerfil, Set reportes) {
        this.username = username;
        this.pass = pass;
        this.nombreCompleto = nombreCompleto;
+       this.cedula = cedula;
+       this.celular = celular;
        this.perfil = perfil;
-       this.ultimoIngreso = ultimoIngreso;
        this.correoElectronico = correoElectronico;
+       this.fechaRegistro = fechaRegistro;
+       this.imagenPerfil = imagenPerfil;
+       this.reportes = reportes;
     }
    
      @Id 
@@ -80,6 +88,26 @@ public class Usuarios  implements java.io.Serializable {
     }
 
     
+    @Column(name="CEDULA", length=20)
+    public String getCedula() {
+        return this.cedula;
+    }
+    
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    
+    @Column(name="CELULAR", length=20)
+    public String getCelular() {
+        return this.celular;
+    }
+    
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    
     @Column(name="PERFIL", length=5)
     public String getPerfil() {
         return this.perfil;
@@ -87,16 +115,6 @@ public class Usuarios  implements java.io.Serializable {
     
     public void setPerfil(String perfil) {
         this.perfil = perfil;
-    }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="ULTIMO_INGRESO", length=19)
-    public Date getUltimoIngreso() {
-        return this.ultimoIngreso;
-    }
-    
-    public void setUltimoIngreso(Date ultimoIngreso) {
-        this.ultimoIngreso = ultimoIngreso;
     }
 
     
@@ -107,6 +125,35 @@ public class Usuarios  implements java.io.Serializable {
     
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="FECHA_REGISTRO", length=19)
+    public Date getFechaRegistro() {
+        return this.fechaRegistro;
+    }
+    
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    
+    @Column(name="IMAGEN_PERFIL", length=200)
+    public String getImagenPerfil() {
+        return this.imagenPerfil;
+    }
+    
+    public void setImagenPerfil(String imagenPerfil) {
+        this.imagenPerfil = imagenPerfil;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="usuarios")
+    public Set getReportes() {
+        return this.reportes;
+    }
+    
+    public void setReportes(Set reportes) {
+        this.reportes = reportes;
     }
 
 

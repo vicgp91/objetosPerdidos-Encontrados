@@ -4,4 +4,5 @@
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="OBJETOSPERDIDOS"/>
   <table-filter match-name="usuarios"/>
+  <table-filter match-name="reporte"/>
 </hibernate-reverse-engineering>

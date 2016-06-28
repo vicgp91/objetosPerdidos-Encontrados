@@ -12,14 +12,29 @@
         <property name="nombreCompleto" type="string">
             <column name="NOMBRE_COMPLETO" length="50" />
         </property>
+        <property name="cedula" type="string">
+            <column name="CEDULA" length="20" />
+        </property>
+        <property name="celular" type="string">
+            <column name="CELULAR" length="20" />
+        </property>
         <property name="perfil" type="string">
             <column name="PERFIL" length="5" />
-        </property>
-        <property name="ultimoIngreso" type="timestamp">
-            <column name="ULTIMO_INGRESO" length="19" />
         </property>
         <property name="correoElectronico" type="string">
             <column name="CORREO_ELECTRONICO" length="30" />
         </property>
+        <property name="fechaRegistro" type="timestamp">
+            <column name="FECHA_REGISTRO" length="19" />
+        </property>
+        <property name="imagenPerfil" type="string">
+            <column name="IMAGEN_PERFIL" length="200" />
+        </property>
+        <set name="reportes" table="reporte" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USERNAME" length="50" not-null="true" />
+            </key>
+            <one-to-many class="model.Reporte" />
+        </set>
     </class>
 </hibernate-mapping>

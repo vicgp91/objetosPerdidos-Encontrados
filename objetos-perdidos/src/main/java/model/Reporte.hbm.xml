@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-jun-2016 9:50:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Reporte" table="reporte" catalog="objetosperdidos" optimistic-lock="version">
+        <id name="idReporte" type="java.lang.Integer">
+            <column name="ID_REPORTE" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarios" class="model.Usuarios" fetch="select">
+            <column name="USERNAME" length="50" not-null="true" />
+        </many-to-one>
+        <property name="tituloReporte" type="string">
+            <column name="TITULO_REPORTE" length="100" not-null="true" />
+        </property>
+        <property name="fotoReporte" type="string">
+            <column name="FOTO_REPORTE" length="200" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="300" not-null="true" />
+        </property>
+        <property name="estadoReporte" type="string">
+            <column name="ESTADO_REPORTE" length="5" not-null="true" />
+        </property>
+        <property name="celularContacto" type="string">
+            <column name="CELULAR_CONTACTO" length="20" />
+        </property>
+        <property name="correoContacto" type="string">
+            <column name="CORREO_CONTACTO" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>
