@@ -29,6 +29,16 @@
  		<put-attribute name="title" value="" /> 
  		<put-attribute name="body" value="/WEB-INF/jsp/reportes/add.jsp" />
  	</definition> 
+ 	
+<definition name="addUser" extends="common">
+ 		<put-attribute name="title" value="" /> 
+ 		<put-attribute name="body" value="/WEB-INF/jsp/login/addUser.jsp" />
+ 	</definition> 
+ 	
+<definition name="homeUsuarios" extends="common">
+ 		<put-attribute name="title" value="" /> 
+ 		<put-attribute name="body" value="/WEB-INF/jsp/login/homeUsuarios.jsp" />
+ 	</definition> 
 
 
 </tiles-definitions>
