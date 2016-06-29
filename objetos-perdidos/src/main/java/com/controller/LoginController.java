@@ -108,7 +108,10 @@ public class LoginController {
 			Query query = session.createQuery(queryString);
 			query.setString("id", loginVO.getUserName());
 			user = (Usuarios) query.uniqueResult();
-
+			loginVO.setCelular(user.getCelular());
+			loginVO.setCorreoElectronico(user.getCorreoElectronico());
+			loginVO.setUserName(user.getUsername());
+			
 			if (user != null) {
 
 				if (user.getPass().equalsIgnoreCase(loginVO.getPassword())) {

@@ -20,7 +20,9 @@
       <c:url var="urlAddReporte" value="/reportes/agregar" />
       <li><a title="Agregar un nuevo reporte" href="${urlAddReporte}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Agregar Reporte</a></li>
       
-      <li><a title="Consultar listado de reportes" href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Consulta de Reportes</a></li> 
+      
+         <c:url var="urlHomeRep" value="/reportes/listReportes" />
+      <li><a title="Consultar listado de reportes" href="${urlHomeRep}"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Consulta de Reportes</a></li> 
       
        <c:url var="urlHomeUsuarios" value="/loginUsers/admUsuarios" />
       <li><a title="Administracion de información de los usuarios" href="${urlHomeUsuarios}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Administración de Usuarios</a></li> 
