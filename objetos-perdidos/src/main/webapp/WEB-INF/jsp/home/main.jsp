@@ -1,9 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/WEB-INF/jsp/includes/resource.jsp"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +13,12 @@
 <!-- <script src="resources/js/bootstrap.min.js"></script> -->
 
 
-
-<link rel="stylesheet" href="http://localhost:8080/objetos-perdidos/resources/css/bootstrap.min.css"/>
-<script src="http://localhost:8080/objetos-perdidos/resources/js/jquery-3.0.0.min.js"></script>
-<script src="http://localhost:8080/objetos-perdidos/resources/js/bootstrap.min.js"></script>
-
-
-
+<c:url var="css" value="/resources/css/bootstrap.min.css" />
+<c:url var="js" value="/resources/js/jquery-3.0.0.min.js" />
+<c:url var="bootJs" value="/resources/js/bootstrap.min.jsresources/js/bootstrap.min.js" />
+<link rel="stylesheet" href="${css}"/>
+<script src="${js}"></script>
+<script src="${bootJs}"></script>
 </head>
 
 <body>
