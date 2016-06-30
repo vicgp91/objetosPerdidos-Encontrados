@@ -1,13 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-
+<%@ include file="/WEB-INF/jsp/includes/resource.jsp"%>
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -25,12 +16,12 @@
       <li><a title="Consultar listado de reportes" href="${urlHomeRep}"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Consulta de Reportes</a></li> 
       
        <c:url var="urlHomeUsuarios" value="/loginUsers/admUsuarios" />
-      <li><a title="Administracion de informaciÃ³n de los usuarios" href="${urlHomeUsuarios}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> AdministraciÃ³n de Usuarios</a></li> 
+      <li><a title="Administracion de información de los usuarios" href="${urlHomeUsuarios}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Administración de Usuarios</a></li> 
       
       
       
       <c:url var="urlExit" value="/loginUsers/Signoff" />
-      <li><a title="Cerrar SesiÃ³n" href="${urlExit}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Salir</a></li> 
+      <li><a title="Cerrar Sesión" href="${urlExit}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Salir</a></li> 
       
     </ul>
   </div>
