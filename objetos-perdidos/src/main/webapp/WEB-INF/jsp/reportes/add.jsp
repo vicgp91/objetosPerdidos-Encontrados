@@ -22,27 +22,25 @@
 		role="form">
 
 		<div class="page-header col-lg-12" id="areaTituloPantalla">
-			<h3 align="center">Agregar un Reporte de un Objeto</h3>
+			<h3 align="center">Agregar nuevo Reporte</h3>
 		</div>
 
 		<div class="row form-group">
-			<div class="col-lg-9">
+			<div class="col-lg-6">
 				<form:input type="text" path="reportetittle" placeholder="Titúlo"
 					class="form-control" />
 
 			</div>
-		</div>
-
-		<div class=" row form-group">
-			<div class="col-lg-9">
+			<div class="col-lg-6">
 				<form:textarea type="text" path="descripcion"
 					placeholder="descripción" class="form-control" />
 
 			</div>
 		</div>
 
+
 		<div class=" row form-group">
-			<div class="col-lg-9">
+			<div class="col-lg-6">
 
 				<input type="file" name="img" class="form-control" />
 			</div>
@@ -58,8 +56,10 @@
 				<input type="submit" path="*" class="btn btn-primary"
 					id="submitEditar" value="Guardar" />
 				<!-- Boton cancelar -->
-				<button type="button" id="Cancelar" class="btn btn-default"
-					data-dismiss="modal">Cancelar</button>
+				
+					<c:url var="backRep" value="/reportes/listReportes" />
+				<a type="button" href="${backRep}" id="Cancelar" class="btn btn-default"
+					data-dismiss="modal">Cancelar</a>
 
 			</div>
 		</div>

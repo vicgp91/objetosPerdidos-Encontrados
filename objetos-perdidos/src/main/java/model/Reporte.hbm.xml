@@ -23,6 +23,12 @@
         <property name="estadoReporte" type="string">
             <column name="ESTADO_REPORTE" length="5" not-null="true" />
         </property>
+        <property name="cedulaEntregado" type="string">
+            <column name="CEDULA_ENTREGADO" length="20" />
+        </property>
+        <property name="fechaEntregado" type="timestamp">
+            <column name="FECHA_ENTREGADO" length="19" />
+        </property>
         <property name="celularContacto" type="string">
             <column name="CELULAR_CONTACTO" length="20" />
         </property>

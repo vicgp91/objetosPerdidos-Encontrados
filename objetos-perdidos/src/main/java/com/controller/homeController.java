@@ -19,6 +19,7 @@ public class homeController {
 
 		LoginVO login = new LoginVO();
 		login= (LoginVO) request.getSession().getAttribute("loginVO");
+		model.addAttribute("loginSesion", login);
 		
 		 if(login != null){
 			 

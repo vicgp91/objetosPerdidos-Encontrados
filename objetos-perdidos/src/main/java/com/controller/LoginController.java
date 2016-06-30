@@ -111,6 +111,7 @@ public class LoginController {
 			loginVO.setCelular(user.getCelular());
 			loginVO.setCorreoElectronico(user.getCorreoElectronico());
 			loginVO.setUserName(user.getUsername());
+			loginVO.setPerfil(user.getPerfil());
 			
 			if (user != null) {
 
@@ -170,12 +171,7 @@ public class LoginController {
 			HttpServletRequest request, Model model) {
 		logger.info("Validacion de credenciales");
 		
-		
-		LoginVO loginSesion = new LoginVO();
-		loginSesion = (LoginVO) request.getSession().getAttribute("loginVO");
-		if (loginSesion == null) {
-			return "redirect:/loginUsers/valida";
-		}
+	
 
 		Transaction trns = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -189,7 +185,13 @@ public class LoginController {
 				user.setPass(loginVO.getPassword());
 				user.setNombreCompleto(loginVO.getNombreCompleto());
 				user.setCedula(loginVO.getCedula());
-				user.setPerfil(loginVO.getPerfil());
+				if(loginVO.getPerfil()!=null){
+					
+					user.setPerfil(loginVO.getPerfil());
+				}else{
+					user.setPerfil("1");
+				}
+				
 				user.setCorreoElectronico(loginVO.getCorreoElectronico());
 				user.setFechaRegistro(new Date());
 				user.setCelular(loginVO.getCelular());

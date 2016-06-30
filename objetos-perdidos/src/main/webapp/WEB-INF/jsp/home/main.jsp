@@ -15,7 +15,7 @@
 
 <c:url var="css" value="/resources/css/bootstrap.min.css" />
 <c:url var="js" value="/resources/js/jquery-3.0.0.min.js" />
-<c:url var="bootJs" value="/resources/js/bootstrap.min.jsresources/js/bootstrap.min.js" />
+<c:url var="bootJs" value="/resources/js/bootstrap.min.js" />
 <link rel="stylesheet" href="${css}"/>
 <script src="${js}"></script>
 <script src="${bootJs}"></script>

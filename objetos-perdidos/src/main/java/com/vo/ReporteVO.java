@@ -13,8 +13,15 @@ private String estado;
 private String celular;
 private String correo;	
 private MultipartFile img;
+private String cedulaAquienEntrega;
 
 
+public String getCedulaAquienEntrega() {
+	return cedulaAquienEntrega;
+}
+public void setCedulaAquienEntrega(String cedulaAquienEntrega) {
+	this.cedulaAquienEntrega = cedulaAquienEntrega;
+}
 public MultipartFile getImg() {
 	return img;
 }

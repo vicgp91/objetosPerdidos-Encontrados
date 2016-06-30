@@ -22,10 +22,11 @@
 <table id="documentosList" class="table table-condensed table-hover">
 					<thead>
 		                <tr>
-		                  <th>UserName</th>
+		                  <th>Registrado por:</th>
 		                  <th>Titulo</th>
 		                  <th>Descripción</th>
 		                  <th>Email</th>
+		                  <th>Estado</th>
 		                  <th>Imagen</th>
 		                  <th style="text-align:center;">Opciones</th>
 		                </tr>
@@ -37,24 +38,31 @@
 								<td class="col-lg-2">${itemReportes.reportetittle}</td>
 								<td class="col-lg-2">${itemReportes.descripcion}</td>
 								<td class="col-lg-2">${itemReportes.correo}</td>
+								<td class="col-lg-1">${itemReportes.estado}</td>
+								
+								
+								
+								
 								<td class="col-lg-2">
 								
-								<img src="${rutaImg}${itemReportes.foto}" class="img-responsive" alt="Cinque Terre">
+								<img height="300" width="300" src="${rutaImg}${itemReportes.foto}" class="img-responsive" alt="Cinque Terre">
 								</td>
 								
 								
-								<td class="col-lg-2" style="vertical-align: middle;text-align:center;">
+								<td class="col-lg-1" style="vertical-align: middle;text-align:center;">
 							
 							
-							<c:url var="varEdit" value="/loginUsers/editUser/"/>
-										<a id="editarUsuario"
+							<c:url var="varEdit" value="/reportes/editReporte/${itemReportes.reporteid}"/>
+							
+							<c:if test="${itemReportes.estado != 'Entregado'}">
+							
+							<c:if test="${loginSesion.perfil != '1'}">
+										<a id="EditarRep"
 											href="${varEdit}"
-											type="button" class="btn btn-success btn-sm dpdf"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar</a>
-								
-							
-								        <c:url var="varDelete" value="/loginUsers/eliminar/"/>
-										<a id="deleteDoc" href="${varDelete}"
-										type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar</a>
+											type="button" class="btn btn-success btn-sm dpdf"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Entregar</a>
+								</c:if>
+							</c:if>
+								  
 									
 								</td>
 							</tr>

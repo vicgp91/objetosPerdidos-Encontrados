@@ -3,6 +3,7 @@ CREATE DATABASE OBJETOSPERDIDOS;
 USE OBJETOSPERDIDOS;
 
 
+
 CREATE TABLE USUARIOS
 (
 
@@ -19,6 +20,14 @@ IMAGEN_PERFIL VARCHAR (200)
 );
 
 
+INSERT INTO USUARIOS(username, pass, nombre_completo, cedula, celular, perfil, correo_electronico, fecha_registro, imagen_perfil) 
+values ('vicgp91', '123456', 'Vicente González', '9-736-1038', '65593467', '5', 'vicgp_24@hotmail.com', now() , '----');
+
+delete from usuarios where username = 'vicgp91'
+
+select * from usuarios
+
+
 CREATE TABLE REPORTE (
   ID_REPORTE INT NOT NULL AUTO_INCREMENT,
   TITULO_REPORTE varchar(100) NOT NULL,
@@ -26,6 +35,8 @@ CREATE TABLE REPORTE (
   DESCRIPCION varchar(300) NOT NULL,
   USERNAME varchar (50) NOT NULL,
   ESTADO_REPORTE VARCHAR(5) NOT NULL,
+  CEDULA_ENTREGADO VARCHAR (20) NULL,
+  FECHA_ENTREGADO datetime NULL,
   CELULAR_CONTACTO VARCHAR (20) NULL,
   CORREO_CONTACTO VARCHAR (50) NULL,
   primary key (ID_REPORTE),
@@ -34,6 +45,6 @@ CREATE TABLE REPORTE (
 
 
 
-select * from USUARIOS
+select * from REPORTE where id_reporte =1
 
 

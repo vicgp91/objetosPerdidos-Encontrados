@@ -2,17 +2,9 @@
 
 
 <script type="text/javascript">
+	$(document).ready(function() {
 
-
-
-
-$( document ).ready(function() {
-
-	
-	
-});
-
-
+	});
 </script>
 
 
@@ -61,19 +53,19 @@ $( document ).ready(function() {
 										class="btn btn-primary" />
 								</div>
 							</div>
-                            
-							
-								<div id="mensajeLogin" class="alert alert-danger col-sm-12" role="alert">
-									<p>${mensajeLogin}</p>
-								</div>
-							
+
+
+							<div id="mensajeLogin" class="alert alert-danger col-sm-12"
+								role="alert">
+								<p>${mensajeLogin}</p>
+							</div>
+
 							<div class="form-group">
 								<div class="col-md-12 control">
 									<div
 										style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
-										Ha olvidado su clave de acceso? <a href="#"
-											onClick="$('#loginbox').hide(); $('#rememberbox').show()">Recordar
-											contrase&ntilde;a</a>
+										No tiene una cuenta? <a href="#"
+											onClick="$('#loginbox').hide(); $('#rememberbox').show()">Registrate</a>
 									</div>
 								</div>
 							</div>
@@ -86,7 +78,7 @@ $( document ).ready(function() {
 				class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						<div class="panel-title">Recordar contrase&ntilde;a</div>
+						<div class="panel-title">Crear cuenta</div>
 						<div
 							style="float: right; font-size: 85%; position: relative; top: -10px">
 							<a id="signinlink" href="#"
@@ -96,25 +88,88 @@ $( document ).ready(function() {
 
 					<div style="padding-top: 30px" class="panel-body">
 
-						<form action="/cyoe-idp/rememberPassword" id="signupform"
-							class="form-horizontal">
+						<div class="col-lg-12 area-trabajo">
+							<c:url var="url" value="/loginUsers/addUsuarioPost" />
+							<form:form method="POST" action="${url}" modelAttribute="loginVO"
+								id="usuarioForm" class="form-horizontal" role="form">
 
-							<div style="margin-bottom: 25px" class="input-group">
-								<span class="input-group-addon"> <i
-									class="glyphicon glyphicon-envelope"></i>
-								</span> <input type="text" class="form-control" name="email"
-									placeholder="Correo Electronico" required="required">
-							</div>
-
-							<div class="form-group" style="margin-top: 10px">
-								<!-- Button -->
-								<div class="col-sm-12 controls">
-									<input type="submit" id="btn-signup" value="Enviar"
-										class="btn btn-success" />
+								<div class="page-header col-lg-12 " id="areaTituloPantalla">
+									<h3>Completa los siguientes datos</h3>
 								</div>
-							</div>
 
-						</form>
+
+								<div class="form-group">
+									<div class="col-lg-12">
+										<form:input path="userName" placeholder="User Name"
+											class="form-control" required="required" />
+
+									</div>
+								</div>
+								<div class="form-group">
+
+
+									<div class="col-lg-12">
+										<form:password placeholder="Password" path="password"
+											class="form-control" required="required" />
+									</div>
+
+
+
+								</div>
+
+								<div class="form-group">
+
+									<div class="col-lg-12">
+										<form:input placeholder="Nombre
+										Completo"
+											path="nombreCompleto" class="form-control"
+											required="required" />
+									</div>
+								</div>
+								<div class="form-group">
+
+									<div class="col-lg-12">
+										<form:input placeholder="Cédula" path="cedula"
+											class="form-control" required="required" />
+									</div>
+								</div>
+
+
+
+								<div class="form-group">
+									
+									<div class="col-lg-12">
+										<form:input placeholder="Celular" path="celular" class="form-control"
+											required="required" />
+									</div>
+
+
+								</div>
+
+								<div class="form-group">
+
+
+									<div class="col-lg-12">
+										<form:input placeholder="Email" path="correoElectronico" class="form-control"
+											required="required" />
+
+									</div>
+
+
+								</div>
+
+								<div class="form-group">
+									<div class="col-lg-12" id="botonesAccionFormulario">
+
+										<form:input type="submit" path="*" class="btn btn-primary"
+											id="submitEditar" value="Guardar" />
+									</div>
+								</div>
+
+
+
+							</form:form>
+						</div>
 					</div>
 
 				</div>
