@@ -18,7 +18,7 @@
 
 <h1 align="center"><font color="green" size="4">&#9679; Si encontrastes o perdistes algo puedes publicarlo gratis.</font></h1>    
 
-<h1 align="center"><font color="orange" size="4">&#9679; Se suministrará tu correo en el post para que los interezados<br>
+<h1 align="center"><font color="orange" size="4">&#9679; Se suministrará tu correo en el post para que los interesados<br>
 se pongan en contacto con tigo!</font></h1>    
 
 </div>
