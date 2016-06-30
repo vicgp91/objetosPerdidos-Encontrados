@@ -1,9 +1,16 @@
 package com.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import model.HibernateUtil;
@@ -20,6 +27,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vo.LoginVO;
@@ -28,6 +37,7 @@ import com.vo.ReporteVO;
 @Controller
 @RequestMapping(value = "/reportes")
 public class AgregarReporteController {
+	public static String ROOT = "C:"+File.separator+""+File.separator+"apache-tomcat-8.0.22"+File.separator+"webapps"+File.separator+"ROOT"+File.separator+"imagenes";
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(AgregarReporteController.class);
@@ -52,7 +62,7 @@ public class AgregarReporteController {
 	public String addReportePost(
 			@ModelAttribute("reportevo") ReporteVO reporteVO,
 			final RedirectAttributes redirectAttributes,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, Model model) throws IOException {
 		logger.info("Validacion de credenciales");
 
 		LoginVO loginSesion = new LoginVO();
@@ -66,19 +76,32 @@ public class AgregarReporteController {
 
 		try {
 			Reporte objetoreporte = new Reporte();
+			
+			if (!reporteVO.getImg().isEmpty()) {
+				
+				
+				Files.copy(reporteVO.getImg().getInputStream(), Paths.get(ROOT, reporteVO.getImg().getOriginalFilename()));
+				objetoreporte.setFotoReporte(reporteVO.getImg().getOriginalFilename());
+				
+				 }else{
+					 objetoreporte.setFotoReporte("----");
+				 }
+			
+			
+			
+			
 			trns = session.beginTransaction();
-
+			
 			objetoreporte.setUsuarios(new Usuarios(loginSesion.getUserName()));
 			objetoreporte.setTituloReporte(reporteVO.getReportetittle());
 			objetoreporte.setDescripcion(reporteVO.getDescripcion());
 			objetoreporte.setCorreoContacto(loginSesion.getCorreoElectronico());
 			objetoreporte.setCelularContacto(loginSesion.getCelular());
 			objetoreporte.setEstadoReporte("1");
-			objetoreporte.setFotoReporte("----");
 			session.save(objetoreporte);
 			session.getTransaction().commit();
 
-			return "redirect:/reportes/agregar";
+			return "redirect:/reportes/listReportes";
 
 		} catch (RuntimeException e) {
 			if (trns != null) {
@@ -87,7 +110,7 @@ public class AgregarReporteController {
 			e.printStackTrace();
 			model.addAttribute("mensaje",
 					"Ha ocurrido un error en la solicitud");
-			return "redirect:/reportes/agregar";
+			return "redirect:/reportes/listReportes";
 		} finally {
 			session.flush();
 			session.close();
@@ -113,7 +136,7 @@ public class AgregarReporteController {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			trns = session.beginTransaction();
-			String queryString = "from Reporte";
+			String queryString = "from Reporte order by ID_REPORTE DESC";
 			Query query = session.createQuery(queryString);
 			reporte = (List<Reporte>) query.list();
 
@@ -124,6 +147,7 @@ public class AgregarReporteController {
 				rep.setReporteid(report.getIdReporte());
 				rep.setReportetittle(report.getTituloReporte());
 				rep.setDescripcion(report.getDescripcion());
+				rep.setFoto(report.getFotoReporte());
 				reporteVO.add(rep);
 			}
 

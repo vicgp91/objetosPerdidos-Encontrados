@@ -16,6 +16,8 @@
 		</h3>
 	</div>
 
+
+<c:url var="rutaImg" value="http://localhost:8080/imagenes/" />
 	<div id="areaListado" class="col-lg-12">
 <table id="documentosList" class="table table-condensed table-hover">
 					<thead>
@@ -24,6 +26,7 @@
 		                  <th>Titulo</th>
 		                  <th>Descripción</th>
 		                  <th>Email</th>
+		                  <th>Imagen</th>
 		                  <th style="text-align:center;">Opciones</th>
 		                </tr>
 		            </thead>
@@ -34,6 +37,12 @@
 								<td class="col-lg-2">${itemReportes.reportetittle}</td>
 								<td class="col-lg-2">${itemReportes.descripcion}</td>
 								<td class="col-lg-2">${itemReportes.correo}</td>
+								<td class="col-lg-2">
+								
+								<img src="${rutaImg}${itemReportes.foto}" class="img-responsive" alt="Cinque Terre">
+								</td>
+								
+								
 								<td class="col-lg-2" style="vertical-align: middle;text-align:center;">
 							
 							

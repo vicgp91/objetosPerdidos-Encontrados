@@ -1,5 +1,8 @@
 package com.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
+
 public class ReporteVO {
 private Integer reporteid;
 private String reportetittle;
@@ -9,6 +12,15 @@ private String username;
 private String estado;
 private String celular;
 private String correo;	
+private MultipartFile img;
+
+
+public MultipartFile getImg() {
+	return img;
+}
+public void setImg(MultipartFile img) {
+	this.img = img;
+}
 public Integer getReporteid() {
 	return reporteid;
 }
