@@ -17,7 +17,7 @@
 	</div>
 
 
-<c:url var="rutaImg" value="http://localhost:8080/imagenes/" />
+<c:url var="rutaImg" value="http://localhost:8081/imagenes/" />
 	<div id="areaListado" class="col-lg-12">
 <table id="documentosList" class="table table-condensed table-hover">
 					<thead>

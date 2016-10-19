@@ -40,7 +40,7 @@ import com.vo.ReporteVO;
 @RequestMapping(value = "/reportes")
 public class AgregarReporteController {
 	public static String ROOT = "C:" + File.separator + "" + File.separator
-			+ "apache-tomcat-8.0.22" + File.separator + "webapps"
+			+ "apache-tomcat-7.0.52" + File.separator + "webapps"
 			+ File.separator + "ROOT" + File.separator + "imagenes";
 
 	private static final Logger logger = LoggerFactory

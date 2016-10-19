@@ -15,7 +15,7 @@
 </script>
 
 <div class="col-lg-12 container">
-	<c:url var="rutaImg" value="http://localhost:8080/imagenes/" />
+	<c:url var="rutaImg" value="http://localhost:8081/imagenes/" />
 	<c:url var="url" value="/reportes/editReportSubmit" />
 	<form:form method="POST" action="${url}" modelAttribute="repVO"
 		id="usuarioForm" enctype="multipart/form-data" class="form-horizontal"

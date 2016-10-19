@@ -6,8 +6,9 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/OBJETOSPERDIDOS?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.url">jdbc:mysql://db4free.net:3306/bd_objetos?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">vicgp91</property>
+    <property name="hibernate.connection.password">123456</property>
     <mapping resource="model/Usuarios.hbm.xml"/>
     <mapping resource="model/Reporte.hbm.xml"/>
   </session-factory>
