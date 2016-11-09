@@ -3,18 +3,39 @@ package model;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-
 public class HibernateUtil {
 	
 	private static  SessionFactory sessionFactory = buildSessionFactory();
 	private static SessionFactory buildSessionFactory() {
         try {
         	
-        	 Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
-             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-             sessionFactory = configuration.buildSessionFactory(builder.build());
+        	
+        	Configuration cfg = new Configuration()
+            .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+            .setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver")
+            .setProperty("hibernate.connection.url", "jdbc:mysql://db4free.net:3306/bd_objetos?zeroDateTimeBehavior=convertToNull")
+            .setProperty("hibernate.connection.username", "vicgp91")
+            .setProperty("hibernate.connection.password","123456")
+             .addClass(Usuarios.class).addClass(Reporte.class);
+           //.addResource("model/Usuarios__.hbm.xml").addResource("model/Reporte__.hbm.xml");
+        	
+        	
+             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties());
+        	
+        	
+        	
+        	
+             sessionFactory = cfg.buildSessionFactory(builder.build());
     
             return  sessionFactory;
+        	
+        	
+        	/*return new AnnotationConfiguration()
+    		.configure()
+            .buildSessionFactory();*/
+        	
+        	
+        	
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
