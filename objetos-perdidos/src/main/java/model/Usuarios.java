@@ -33,7 +33,7 @@ public class Usuarios  implements java.io.Serializable {
      private String correoElectronico;
      private Date fechaRegistro;
      private String imagenPerfil;
-     private Set reportes = new HashSet(0);
+     //private Set reportes = new HashSet(0);
 
     public Usuarios() {
     }
@@ -52,7 +52,7 @@ public class Usuarios  implements java.io.Serializable {
        this.correoElectronico = correoElectronico;
        this.fechaRegistro = fechaRegistro;
        this.imagenPerfil = imagenPerfil;
-       this.reportes = reportes;
+      // this.reportes = reportes;
     }
    
      @Id 
@@ -147,14 +147,14 @@ public class Usuarios  implements java.io.Serializable {
         this.imagenPerfil = imagenPerfil;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="usuarios")
+/*@OneToMany(fetch=FetchType.LAZY, mappedBy="usuarios")
     public Set getReportes() {
         return this.reportes;
     }
     
     public void setReportes(Set reportes) {
         this.reportes = reportes;
-    }
+    }*/
 
 
 
